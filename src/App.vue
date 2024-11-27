@@ -1,5 +1,9 @@
 <script setup>
-import { reactive } from 'vue';
+  import { reactive } from 'vue';
+  import Cabecalho from './components/Cabecalho.vue';
+  import Formulario from './components/Formulario.vue';
+  import Lista from './components/Lista.vue';
+
 
   const estado = reactive({
     filtro: 'todas',
@@ -54,42 +58,8 @@ import { reactive } from 'vue';
 
 <template>
   <div class="container">
-    <header class="p-5 mb-4 mt-4 bg-light rounded-3">
-      <h1>Minhas tarefas</h1>
-      <p>
-        Você possui {{ getTarefasPendentes().length }} tarefas pendentes!
-      </p>
-    </header>
-
-    <form @submit.prevent="cadastraTarefa"> <!-- '.prevent' = previne a ação padrão do submit, que é atualizar a pagina -->
-      <div class="row">
-        <div class="col">
-          <input :value="estado.tarefaTemp" required @change="evento => estado.tarefaTemp = evento.target.value" type="text" placeholder="Digite aqui a descrição da tarefa" class="form-control">
-        </div>
-        <div class="col-md-2">
-          <button type="submit" class="btn btn-primary">Cadastrar</button>
-        </div>
-        <div class="col-md-2">
-          <select @change="evento => estado.filtro = evento.target.value" class="form-control">
-            <option value="todas">Todas as tarefas</option>
-            <option value="pendentes">Pendentes</option>
-            <option value="finalizadas">Finalizadas</option>
-          </select>
-        </div>
-      </div>
-    </form>
-    {{ estado.filtro }}
-    
-    <ul class="list-group mt-4">
-      <li class="list-group-item" v-for="tarefa in getTarefasFiltradas()">
-        <input @change="evento => tarefa.finalizada = evento.target.checked" :checked="tarefa.finalizada" :id="tarefa.titulo" type="checkbox">
-        <label :class="{ done: tarefa.finalizada }" class="ms-3" :for="tarefa.titulo">
-          {{ tarefa.titulo }}
-        </label>
-      </li>
-    </ul>
-
-</div>
+    <Cabecalho :tarefas-pendentes="getTarefasPendentes().length" />
+  </div>
 </template>
 
 <style scoped>
