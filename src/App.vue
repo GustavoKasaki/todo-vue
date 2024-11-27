@@ -53,6 +53,10 @@
       estado.tarefas.push(tarefaNova);
       estado.tarefaTemp = '';
     }
+
+    const isVisible = () => estado.tarefas.length >= 1;
+    console.log(estado.tarefas.length)
+    console.log(isVisible())
 </script>
 
 <template>
