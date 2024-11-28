@@ -54,14 +54,15 @@
       estado.tarefaTemp = '';
     }
 
-    const isVisible = () => estado.tarefas.length >= 1;
-    console.log(estado.tarefas.length)
-    console.log(isVisible())
+    const possuiTarefasPendentes = () => {
+      return getTarefasPendentes().length >= 1;
+    }
+    console.log(possuiTarefasPendentes());
 </script>
 
 <template>
   <div class="container">
-    <Cabecalho :tarefas-pendentes="getTarefasPendentes().length" />
+    <Cabecalho :tarefas-pendentes="getTarefasPendentes().length" :possui-tarefas-pendentes="possuiTarefasPendentes()"/>
     <Formulario :trocar-filtro="evento => estado.filtro = evento.target.value" :tarefa-temp="estado.tarefaTemp" :edita-tarefa-temp="evento => estado.tarefaTemp = evento.target.value" :cadastra-tarefa="cadastraTarefa" />
     <Lista :tarefas="getTarefasFiltradas()" />
   </div>
